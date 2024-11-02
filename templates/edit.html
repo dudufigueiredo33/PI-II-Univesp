@@ -2,18 +2,39 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Editar Aluno</title>
+    <title>Notas e Faltas</title>
   </head>
   <body>
-    <h1>Editar Aluno</h1>
-    <form method="post">
-      <label for="nome">Nome</label>
-      <input type="text" name="nome" id="nome" value="{{ aluno.nome }}" required>
-      <label for="nota">Nota</label>
-      <input type="number" name="nota" id="nota" value="{{ aluno.nota }}" required>
-      <label for="faltas">Faltas</label>
-      <input type="number" name="faltas" id="faltas" value="{{ aluno.faltas }}" required>
-      <button type="submit">Salvar</button>
-    </form>
+    <h1>Lista de Alunos</h1>
+    <table>
+      <tr>
+        <th>Nome</th>
+        <th>Nota</th>
+        <th>Faltas</th>
+      </tr>
+      {% for aluno in alunos %}
+      <tr>
+        <td>{{ aluno.nome }}</td>
+        <td>{{ aluno.nota }}</td>
+        <td>{{ aluno.faltas }}</td>
+      </tr>
+      {% endfor %}
+    </table>
+    <a href="{{ url_for('add') }}">Adicionar Novo Aluno</a>
   </body>
 </html>
+
+
+//adicionar botões de edição e exclusão
+{% for aluno in alunos %} 
+    <tr>
+     <td>{{ aluno.nome }}</td> 
+     <td>{{ aluno.nota }}</td> 
+     <td>{{ aluno.faltas }}</td> 
+     <td> <a href="{{ url_for('edit', id=aluno.id) }}">Editar</a> 
+        <form action="{{ url_for('delete', id=aluno.id) }}" method="post" style="display:inline;"> 
+            <button type="submit">Deletar</button> 
+        </form> 
+    </td> 
+</tr>
+{% endfor %}
