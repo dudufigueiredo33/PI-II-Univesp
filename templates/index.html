@@ -1,0 +1,73 @@
+<!doctype html> 
+
+<html lang="pt-br"> 
+
+<head> 
+
+    <title>Controle de Notas e Faltas</title> 
+
+</head> 
+
+<body> 
+
+    <h1>Controle de Notas e Faltas</h1> 
+
+    <a href="{{ url_for('add') }}">Adicionar Estudante</a> 
+
+    <table> 
+
+        <thead> 
+
+            <tr> 
+
+                <th>ID</th> 
+
+                <th>Nome</th> 
+
+                <th>Nota</th> 
+
+                <th>Faltas</th> 
+
+                <th>Ações</th> 
+
+            </tr> 
+
+        </thead> 
+
+        <tbody> 
+
+            {% for student in alunos %} 
+
+            <tr> 
+
+                <td>{{ student['id'] }}</td> 
+
+                <td>{{ student['nome'] }}</td> 
+
+                <td>{{ student['nota'] }}</td> 
+
+                <td>{{ student['ausencias'] }}</td> 
+
+                <td> 
+
+                    <a href="{{ url_for('edit', id=student['id']) }}">Editar</a> 
+
+                    <form action="{{ url_for('delete', id=student['id']) }}" method="post" style="display:inline;"> 
+
+                        <button type="submit">Excluir</button> 
+
+                    </form> 
+
+                </td> 
+
+            </tr> 
+
+            {% endfor %} 
+
+        </tbody> 
+
+    </table> 
+
+</body> 
+
+</html> 
